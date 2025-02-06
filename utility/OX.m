@@ -16,12 +16,13 @@ function [offspring1, offspring2] = OX(parent1, parent2)
     offspring2(c1:c2) = parent2(c1:c2);
 
     % Completamento degli offspring usando il genitore opposto
-    offspring1 = FillRemaining(offspring1, parent2);
-    offspring2 = FillRemaining(offspring2, parent1);
+    offspring1 = FillRemaining(offspring1, parent2, c2);
+    offspring2 = FillRemaining(offspring2, parent1, c2);
 end
 
 % Funzione per completare l'offspring in OX
-function offspring = FillRemaining(offspring, donor)
+function offspring = FillRemaining(offspring, donor, c2)
+    n = length(donor);
     current_pos = mod(c2, n) + 1;  % posizione per riempire l'offspring (ricomincia da 1 dopo n)
     donor_index = current_pos;      % indice per scorrere il donor
     while any(offspring == -1)

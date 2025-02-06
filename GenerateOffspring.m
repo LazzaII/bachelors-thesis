@@ -32,7 +32,7 @@ function offspring = GenerateOffspring(population, crossover_op, mutation_op, Pr
         % Se la condizione di crossover viene soddisfatta, esegue il crossover,
         % altrimenti gli offspring sono uguali ai genitori.
         if rand < crossover_op(2)  % se supera la soglia non fa crossover
-            if strcmpi(Problem.encoding, 'permutation')
+            if Problem.encoding(1) == 5 %permutation'
                 [child1, child2] = PermCrossover(parent1, parent2, crossover_op);
             else 
                 [child1, child2] = BinIntCrossover(parent1, parent2, crossover_op, num_var);

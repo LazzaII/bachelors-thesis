@@ -26,12 +26,13 @@ function [offspring1, offspring2] = PMX(parent1, parent2)
     end
 
     % Completamento degli offspring
-    offspring1 = FillOffspring(offspring1, parent1, mapping1);
-    offspring2 = FillOffspring(offspring2, parent2, mapping2);
+    offspring1 = FillOffspring(offspring1, parent1, mapping1, c1, c2);
+    offspring2 = FillOffspring(offspring2, parent2, mapping2, c1, c2);
 end
 
 % Funzione di utily per completamento degli offspring
-function offspring = FillOffspring(offspring, parent, mapping)
+function offspring = FillOffspring(offspring, parent, mapping, c1, c2)
+    n = length(parent);
     for j = [1:c1-1, c2+1:n]  % Per le posizioni fuori dalla sezione intercambiata
         value = parent(j);
         % Risolvi eventuali conflitti applicando la mappatura

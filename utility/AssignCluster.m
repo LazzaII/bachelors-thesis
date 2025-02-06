@@ -1,6 +1,5 @@
 function cluster_indices = AssignCluster(centroids, solutions)
 % Funzione per assegnare alle nuove soluzioni il cluster di appartenenza
-
     num_sol = length(solutions);
     
     % Prealloca il vettore di indici
