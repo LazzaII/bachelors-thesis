@@ -1,4 +1,4 @@
-function [offspring1, offspring2] = BinIntCrossover(parent1, parent2, crossover_op, num_var)
+function [offspring1, offspring2] = BinRealCrossover(parent1, parent2, crossover_op, num_var)
 % Funzione di utility per crossover con binario/intero
     switch crossover_op(1)
         case 1  % One-point crossover

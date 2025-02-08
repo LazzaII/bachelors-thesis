@@ -32,21 +32,33 @@ function offspring = GenerateOffspring(population, crossover_op, mutation_op, Pr
         % Se la condizione di crossover viene soddisfatta, esegue il crossover,
         % altrimenti gli offspring sono uguali ai genitori.
         if rand < crossover_op(2)  % se supera la soglia non fa crossover
-            if Problem.encoding(1) == 5 %permutation'
+            if Problem.encoding(1) == 5 % permutation
                 [child1, child2] = PermCrossover(parent1, parent2, crossover_op);
             else 
-                [child1, child2] = BinIntCrossover(parent1, parent2, crossover_op, num_var);
+                [child1, child2] = BinRealCrossover(parent1, parent2, crossover_op, num_var);
             end
         else
             child1 = parent1;
             child2 = parent2;
         end
-        
-        % Mutazione: per ogni gene (variabile) degli offspring
-        for j = 1:num_var
-            if rand < mutation_op(2)  % se supera la soglia non muta
-                child1(j) = MutateGene(child1(j), Problem, mutation_op(1));
-                child2(j) = MutateGene(child2(j), Problem, mutation_op(1));
+
+        if Problem.encoding(1) == 5 
+            % Mutazione per permutazioni
+            if rand < mutation_op(2)
+                child1 = PermMutation(child1, mutation_op(1));
+            end
+            if rand < mutation_op(2)
+                child2 = PermMutation(child2, mutation_op(1));
+            end
+        else 
+            % Mutazione per reali/binari: per ogni gene (variabile) degli offspring
+            for j = 1:num_var
+                if rand < mutation_op(2)  % se supera la soglia non muta
+                    child1(j) = MutateGene(child1(j), Problem, mutation_op(1));
+                end
+                if rand < mutation_op(2)
+                    child2(j) = MutateGene(child2(j), Problem, mutation_op(1));
+                end
             end
         end
         
@@ -54,6 +66,6 @@ function offspring = GenerateOffspring(population, crossover_op, mutation_op, Pr
         offspring_matrix(2*i-1, :) = child1;
         offspring_matrix(2*i, :)   = child2;
     end
-
+    disp(offspring_matrix);
     offspring = Problem.Evaluation(offspring_matrix);
 end
