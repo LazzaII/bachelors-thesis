@@ -32,7 +32,7 @@ function offspring = GenerateOffspring(population, crossover_op, mutation_op, Pr
         % Se la condizione di crossover viene soddisfatta, esegue il crossover,
         % altrimenti gli offspring sono uguali ai genitori.
         if rand < crossover_op(2)  % se supera la soglia non fa crossover
-            if Problem.encoding(1) == 5 % permutation
+            if Problem.encoding(1) == 5 %permutation
                 [child1, child2] = PermCrossover(parent1, parent2, crossover_op);
             else 
                 [child1, child2] = BinRealCrossover(parent1, parent2, crossover_op, num_var);
@@ -66,6 +66,5 @@ function offspring = GenerateOffspring(population, crossover_op, mutation_op, Pr
         offspring_matrix(2*i-1, :) = child1;
         offspring_matrix(2*i, :)   = child2;
     end
-    disp(offspring_matrix);
     offspring = Problem.Evaluation(offspring_matrix);
 end
