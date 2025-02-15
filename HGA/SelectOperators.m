@@ -11,11 +11,11 @@ function [crossover_op, mutation_op, state_idx, action_idx] = SelectOperators(cl
         end
     end
 
-    % Estrazione di tutti i reward
+    % Estrazione di tutti i values
     num_actions = size(Algo.current_Qtable, 2);
-    rewards = zeros(1, num_actions);
+    values = zeros(1, num_actions);
     for i = 1:num_actions
-        rewards(i) = Algo.current_Qtable{state_idx, i}.reward;
+        values(i) = Algo.current_Qtable{state_idx, i}.value;
     end
 
     % Selezione dell'operatore O tramite politica e-greedy
@@ -24,8 +24,8 @@ function [crossover_op, mutation_op, state_idx, action_idx] = SelectOperators(cl
         action_idx = randi(num_actions);
     else
         % Exploitation: scegli l'azione con il valore massimo
-        max_reward = max(rewards);
-        best_actions = find(rewards == max_reward);
+        max_value = max(values);
+        best_actions = find(values == max_value);
         % Se ci sono più azioni con lo stesso max reward, sceglie una a caso fra queste
         if length(best_actions) > 1
             action_idx = best_actions(randi(length(best_actions)));

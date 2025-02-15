@@ -16,8 +16,8 @@ function max_nest_state = CalculateMax(population, idx, Algo)
 
     % Estrazione riga e campo reward
     cell_row = Algo.current_Qtable(next_state, :);
-    rewards = cellfun(@(s) s.reward, cell_row);
+    values = cellfun(@(s) s.value, cell_row);
     
     % Prendiamo il massimo al prossimo stato
-    max_nest_state = max(rewards);
+    max_nest_state = max(values);
 end

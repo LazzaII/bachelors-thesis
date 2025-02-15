@@ -4,7 +4,7 @@ function selected_clusters = TournamentSelection(idx, population)
     num_clusters = 3;
     selected_clusters = zeros(1, 2);
     
-    % Calcola la fitness di ogni cluster: ad esempio, come media delle fitness
+    % Calcola la fitness di ogni cluster come la media delle norme euclidee delle soluzioni
     clusterFitness = zeros(num_clusters, 1);
     for i = 1:num_clusters
         selected_solutions = population(idx == i);

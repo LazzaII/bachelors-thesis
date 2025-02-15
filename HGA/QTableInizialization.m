@@ -1,5 +1,5 @@
-function [Qtable] = QTableInizialization(type, idx, population, Algo)
-% Inizializzazione della QTable
+function [Qtable] = QTableInizialization(type, Algo)
+% Inizializzazione della QTable con valori Q iniziali
    
     if type(1) == 5 %permutation'
         crossover_types = 1:2; % PMX, OX    
@@ -38,10 +38,9 @@ function [Qtable] = QTableInizialization(type, idx, population, Algo)
     %   - reward: 
     %   - state: vettore 1×2 corrispondente allo stato (riga della Q-table)
     %   - gaOperators: la matrice 2×2 della combinazione d'azione
-    rewards = InitializeQTableRewards(idx, population, Algo);
     for s = 1:num_states
         for a = 1:num_actions
-            cellStruct.reward = rewards(s);
+            cellStruct.value = 0; 
             cellStruct.state = Algo.states(s, :);
             cellStruct.gaOperators = actions{a};
             Qtable{s, a} = cellStruct;
