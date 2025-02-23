@@ -1,16 +1,22 @@
-Abstract
+# ABSTRACT
 
-This thesis aims to develop and test a hybrid genetic algorithm obtained by integrating the classic approach of genetic algorithms with machine learning techniques such as clustering and reinforcement learning. The main objective is to improve performance in the search for optimal solutions in complex optimization problems, addressing some of the limitations of traditional genetic algorithms, such as premature convergence and insufficient exploration of the solution space.
+## Eng version
 
-Initially, a review of evolutionary algorithms (in particular genetic algorithms) and their possible criticalities is provided, along with an explanation of clustering algorithms and reinforcement learning. Subsequently, the structure and implementation of the hybrid algorithm are illustrated. In this approach, clustering is used to group solutions into homogeneous subdomains, while reinforcement learning is employed to dynamically guide the process of genetic selection and variation (choice of genetic operators) based on feedback (rewards/penalties) derived from previous applications (reinforcement learning).
+This thesis aims to develop a hybrid genetic algorithm by integrating the classical approach of genetic algorithms with machine learning techniques such as clustering and reinforcement learning. The main objective is to enhance performance in searching for optimal solutions in complex optimization problems, addressing some limitations of traditional genetic algorithms.
 
-The experimentation compares the performance of the hybrid algorithm with that of a traditional genetic algorithm, MOEA/D, through a series of selected optimization benchmark problems: DTLZ2 and ZDT3 for real-valued solutions, ZDT5 and MONRP for binary solutions, and MOTSP and mQAP for permutative solutions.
+Initially, a review of evolutionary algorithms, particularly genetic algorithms, is presented along with their potential challenges, as well as an explanation of clustering techniques and reinforcement learning algorithms.
 
-The results indicate that the developed algorithm tends to achieve better performance in terms of execution time and hypervolume. Specifically, it is generally faster for problems with binary and real-valued solutions, while performance is slightly worse or similar for problems with permutative solutions. In terms of hypervolume, which represents the quality of the solutions, it is better or similar compared to MOEA/D. The main critical issues concern the survival phase of solutions, where the current strategy may limit population diversity. Improving this phase could lead to a significant performance gain, making the hybrid algorithm clearly superior to a traditional approach.
+Subsequently, the structure and implementation of the hybrid algorithm are described. In this approach, clustering is employed to group solutions into homogeneous subdomains, while reinforcement learning is used to adaptively guide the selection and evolution process based on feedback (rewards/penalties) derived from reinforcement learning.
+
+The conducted experiments compared the performance of the hybrid algorithm with that of a genetic algorithm, MOEA/D, across a series of benchmark optimization problems: DTLZ2 and ZDT3 for real-valued solutions, ZDT5 and MONRP for binary solutions, and MOTSP and mQAP for permutative solutions.
+
+The results indicate that, in general, the developed algorithm performs better in terms of execution time and hypervolume. Specifically, it is generally faster for problems with binary and real-valued solutions, while it performs slightly worse or similarly for problems with permutative solutions. Regarding hypervolume, which represents the quality of solutions, it is either superior or comparable to MOEA/D.
+
+The main challenges encountered relate to the survival phase of solutions, where the adopted strategy may limit population diversity. Refining this aspect could lead to a significant performance improvement, making the hybrid algorithm distinctly superior to a traditional approach.
 
 This study represents a first step toward the development of more efficient hybrid genetic algorithms, paving the way for future optimizations.
 
-ITALIANO
+## It version
 
 Questa tesi si propone di sviluppare e sperimentare un algoritmo genetico ibrido, ottenuto mediante l'integrazione dell'approccio classico degli algoritmi genetici con tecniche di machine learning quali il *clustering* e l'apprendimento per rinforzo. L'obiettivo principale è quello di migliorare le prestazioni nella ricerca di soluzioni ottimali in problemi di ottimizzazione complessi, cercando di alcune delle limitazioni degli algoritmi genetici tradizionali, come la convergenza prematura e l'esplorazione insufficiente dello spazio delle soluzioni.
 
