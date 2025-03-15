@@ -1,5 +1,5 @@
 classdef HYBRIDGA < ALGORITHM
-    % <2054> <multi> <real/binary/permutation> <large/none> <constrained/none>
+    % <2025> <multi> <real/binary/permutation> <large/none> <constrained/none>
     % Hybrid Genetic Algorithm
 
     properties
