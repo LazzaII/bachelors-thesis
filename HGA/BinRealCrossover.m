@@ -1,5 +1,5 @@
 function [offspring1, offspring2] = BinRealCrossover(parent1, parent2, crossover_op, num_var)
-% Funzione di utility per crossover con binario/intero
+% utilty function for real/binary crossover
     switch crossover_op(1)
         case 1  % One-point crossover
             cp = randi([1, num_var-1]); % punto di crossover

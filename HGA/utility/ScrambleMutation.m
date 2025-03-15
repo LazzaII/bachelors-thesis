@@ -1,25 +1,26 @@
 function mutated_child = ScrambleMutation(child)    
-    % Numero di geni nel cromosoma
+% function for scramble mutation 
+    % number of genes in the chromosome
     n = length(child);
 
-    % Seleziona casualmente due punti di taglio i e j
+    % randomly select two cut points i and j
     i = randi([1, n]);
     j = randi([1, n]);
 
-    % Assicuriamoci che i <= j, altrimenti si invertono
+    % ensure that i <= j, otherwise swap them
     if i > j
         temp = i;
         i = j;
         j = temp;
     end
 
-    % Estrazione del segmento da i a j
+    % extract the segment from i to j
     segment = child(i:j);
 
-    % Scramble dei geni del segmento estratto
+    % scramble the genes of the extracted segment
     scrambled_segment = segment(randperm(length(segment)));
 
-    % Ricostruisci il cromosoma mutato
+    % reconstruct the mutated chromosome
     mutated_child = child;
     mutated_child(i:j) = scrambled_segment;
 end

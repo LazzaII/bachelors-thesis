@@ -1,5 +1,5 @@
 function [offspring1, offspring2] = PermCrossover(parent1, parent2, crossover_op)
-% Funzione switch per crossover con permutazione
+% switch function for crossover with permutation
     switch crossover_op(1)
         case 1  % PMX
             [offspring1, offspring2] = PMX(parent1, parent2);

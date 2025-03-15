@@ -1,5 +1,5 @@
 function [Qtable] = QTableInizialization(type, Algo)
-% Inizializzazione della QTable con valori Q iniziali
+% initialization of the QTable with initial Q values
    
     if type(1) == 5 %permutation'
         crossover_types = 1:2; % PMX, OX    
@@ -7,15 +7,15 @@ function [Qtable] = QTableInizialization(type, Algo)
         crossover_types = 1:3; % 1,2, uniforme           
     end
     
-    % Numero totale di azioni (combinazioni di mutazioni e crossover):
+    % total number of actions (combinations of mutations and crossovers):
     num_actions = numel(crossover_types) * numel(Algo.crossover_rates) * numel(Algo.mutation_types) * numel(Algo.mutation_rates);
-    % Numero totale di stati (combinazioni di cluster):
+    % total number of states (combinations of clusters):
     num_states  = size(Algo.states, 1);
     
-    % Generazione di tutte le combinazioni degli operatori genetici
-    % Per ogni combinazione creiamo una matrice 2×2:
-    %   - Prima riga (Crossover): [crossover_type, crossover_rate]
-    %   - Seconda riga (Mutazione): [mutation_type, mutation_rate]
+    % Generation of all combinations of genetic operators
+    % For each combination, we create a 2×2 matrix:
+    %   - First row (Crossover): [crossover_type, crossover_rate]
+    %   - Second row (Mutation): [mutation_type, mutation_rate]
     actions = cell(1, num_actions);
     actionIndex = 1;
     for i = 1:length(crossover_types)
@@ -31,13 +31,13 @@ function [Qtable] = QTableInizialization(type, Algo)
         end
     end
     
-    % La Q-table è una cell array di dimensione 6×54 o 6x36
+    % the Q-table is a cell array of size 6×54 or 6×36
     Qtable = cell(num_states, num_actions);
     
-    % In ogni cella viene salvata una struttura con:
+    % each cell stores a structure with:
     %   - reward: 
-    %   - state: vettore 1×2 corrispondente allo stato (riga della Q-table)
-    %   - gaOperators: la matrice 2×2 della combinazione d'azione
+    %   - state: a 1×2 vector corresponding to the state (row of the Q-table)
+    %   - gaOperators: the 2×2 matrix of the action combination
     for s = 1:num_states
         for a = 1:num_actions
             cellStruct.value = 0; 

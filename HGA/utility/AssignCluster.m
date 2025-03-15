@@ -1,22 +1,22 @@
 function cluster_indices = AssignCluster(centroids, solutions)
-% Funzione per assegnare alle nuove soluzioni il cluster di appartenenza
+% function to assign new solutions to their respective clusters
     num_sol = length(solutions);
     
-    % Prealloca il vettore di indici
+    % preallocate the index vector
     cluster_indices = zeros(num_sol, 1);
     
-    % Per ogni soluzione, calcola la distanza dai centroidi e assegna il cluster
+    % for each solution, compute the distance from centroids and assign the cluster
     for i = 1:num_sol
-        % Estrazione var decisione
+        % extract decision variables
         sol_vector = solutions(i).dec;  
         
-        % Calcola la distanza euclidea 
+        % compute Euclidean distance 
         distances = sqrt(sum((centroids - sol_vector) .^ 2, 2));
         
-        % Trova l'indice del centroide più vicino
+        % find the index of the closest centroid
         [~, min_index] = min(distances);
         
-        % Assegna l'indice del cluster
+        % assign the cluster index
         cluster_indices(i) = min_index;
     end
 end

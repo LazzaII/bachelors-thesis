@@ -1,5 +1,5 @@
 function filtered_population = CleanPopulation(population)
-% Funzione per ripulire gli outlier
+% function to clean outliers
 
     p = inputParser;
     addParameter(p, 'MinPopRatio', 0.8, @(x) isnumeric(x) && x>0 && x<=1);
@@ -9,35 +9,35 @@ function filtered_population = CleanPopulation(population)
     min_pop_ratio = p.Results.MinPopRatio;
     multiplier = p.Results.Multiplier;
 
-    % Fitness dalla popolazione
+    % fitness from the population
     objectives = cat(1, population.obj);  
     
-    % Norma euclidea per ottenere una fitness scalare
+    % euclidean norm to obtain a scalar fitness
     scalar_fitness = vecnorm(objectives, 2, 2);  
     
-    % Calcola i quartili e l'IQR
+    % compute quartiles and IQR (Interquartile Range)
     Q1 = quantile(scalar_fitness, 0.25);
     Q3 = quantile(scalar_fitness, 0.75);
     IQR_val = Q3 - Q1;
 
-    % Se la variabilità è quasi nulla, non esegue il filtraggio
+    % if variability is nearly zero, do not perform filtering
     if IQR_val < eps
         filtered_population = population;
         return;
     end
 
-    % Definisce le soglie per rimuovere gli outlier
+    % define thresholds to remove outliers
     lower_bound = Q1 - multiplier * IQR_val;
     upper_bound = Q3 + multiplier * IQR_val;
 
-    % Seleziona gli individui il cui fitness è compreso tra le soglie
+    % select individuals whose fitness is within the thresholds
     idx = find(scalar_fitness >= lower_bound & scalar_fitness <= upper_bound);
     filtered_population = population(idx);
 
-    % Se il filtro elimina troppi individui, impone una dimensione minima
+    % if the filter removes too many individuals, enforce a minimum size
     min_pop_size = max(round(min_pop_ratio * length(population)), 1);
     if length(filtered_population) < min_pop_size
-        % Ordina la popolazione in base al fitness (assumendo che fitness più basso sia migliore)
+        % sort the population based on fitness (assuming lower fitness is better)
         [~, sorted_idx] = sort(scalar_fitness, 'ascend');
         filtered_population = population(sorted_idx(1:min_pop_size));
     end

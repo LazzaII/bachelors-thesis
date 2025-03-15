@@ -1,5 +1,5 @@
 function [value] = UpdateQTableCell(stato, azione, population, idx, pre_fitness, Algo)
-% Funzione di aggiornamento della QTable
+% function for update Q-Table cell
 
     post_fitness = MeanFitness(population);
     max_nest_state = CalculateMax(population, idx, Algo);    

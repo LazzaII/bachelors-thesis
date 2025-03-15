@@ -1,10 +1,10 @@
 function max_nest_state = CalculateMax(population, idx, Algo) 
-% Funzionde di utility per il calcolo del massimo negli stati succesivi
+% utility function to compute the maximum in future states
 
-    % Prendiamo i prossimi cluster con la fitness migliore
+    % select the next clusters with the best fitness
     next_clusters = TournamentSelection(idx, population);
                 
-    % Individuiamo la riga dello stato attuale
+    % identify the row of the current state
     num_states = size(Algo.current_Qtable, 1);
     next_state = -1;
     for s = 1:num_states
@@ -14,10 +14,10 @@ function max_nest_state = CalculateMax(population, idx, Algo)
         end
     end
 
-    % Estrazione riga e campo reward
+    % extract row and reward field
     cell_row = Algo.current_Qtable(next_state, :);
     values = cellfun(@(s) s.value, cell_row);
     
-    % Prendiamo il massimo al prossimo stato
+    % select the maximum at the next state
     max_nest_state = max(values);
 end

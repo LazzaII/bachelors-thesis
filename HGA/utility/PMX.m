@@ -1,23 +1,23 @@
 function [offspring1, offspring2] = PMX(parent1, parent2)
-% PMX Crossover
+% PMX crossover
     n = length(parent1);
     
-    % Selezione di due punti di crossover casuali e ordinati
+    % selection of two random and ordered crossover points
     crossover_points = sort(randperm(n, 2));
     c1 = crossover_points(1);
     c2 = crossover_points(2);
     
-    % Inizializzazione degli offspring 
+    % initialization of offspring
     offspring1 = -ones(1, n);
     offspring2 = -ones(1, n);
     
-    % Copia della sezione intercambiata
+    % copy of the swapped section
     offspring1(c1:c2) = parent2(c1:c2);
     offspring2(c1:c2) = parent1(c1:c2);
     
-    % Costruzione delle mappe per la porzione intercambiata:
-    % La mappa mapping1 associa i geni di parent2 alla controparte in parent1
-    % La mappa mapping2 associa i geni di parent1 alla controparte in parent2
+    % Construction of maps for the swapped portion:
+    % The mapping1 map associates genes from parent2 to their counterpart in parent1
+    % The mapping2 map associates genes from parent1 to their counterpart in parent2
     mapping1 = containers.Map('KeyType','double','ValueType','double');
     mapping2 = containers.Map('KeyType','double','ValueType','double');
     for i = c1:c2
@@ -25,17 +25,17 @@ function [offspring1, offspring2] = PMX(parent1, parent2)
         mapping2(parent1(i)) = parent2(i);
     end
 
-    % Completamento degli offspring
+    % completion of offspring
     offspring1 = FillOffspring(offspring1, parent1, mapping1, c1, c2);
     offspring2 = FillOffspring(offspring2, parent2, mapping2, c1, c2);
 end
 
-% Funzione di utily per completamento degli offspring
+% utility function for offspring completion
 function offspring = FillOffspring(offspring, parent, mapping, c1, c2)
     n = length(parent);
-    for j = [1:c1-1, c2+1:n]  % Per le posizioni fuori dalla sezione intercambiata
+    for j = [1:c1-1, c2+1:n]  % for positions outside the swapped section
         value = parent(j);
-        % Risolvi eventuali conflitti applicando la mappatura
+        % resolve any conflicts by applying the mapping
         while isKey(mapping, value)
             value = mapping(value);
         end

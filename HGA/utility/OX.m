@@ -1,33 +1,33 @@
 function [offspring1, offspring2] = OX(parent1, parent2)
-% OX Crossover
+% OX crossover
     n = length(parent1);
     
-    % Selezione di due punti di crossover casuali e ordinati
+    % selection of two random and ordered crossover points
     crossover_points = sort(randperm(n, 2));
     c1 = crossover_points(1);
     c2 = crossover_points(2);
     
-    % Inizializzazione degli offspring
+    % initialization of offspring
     offspring1 = -ones(1, n);
     offspring2 = -ones(1, n);
     
-    % Copia della sezione fissa
+    % copy of the fixed section
     offspring1(c1:c2) = parent1(c1:c2);
     offspring2(c1:c2) = parent2(c1:c2);
 
-    % Completamento degli offspring usando il genitore opposto
+    % completion of offspring using the opposite parent
     offspring1 = FillRemaining(offspring1, parent2, c2);
     offspring2 = FillRemaining(offspring2, parent1, c2);
 end
 
-% Funzione per completare l'offspring in OX
+% function to complete the offspring in OX (Order Crossover)
 function offspring = FillRemaining(offspring, donor, c2)
     n = length(donor);
-    current_pos = mod(c2, n) + 1;  % posizione per riempire l'offspring (ricomincia da 1 dopo n)
-    donor_index = current_pos;      % indice per scorrere il donor
+    current_pos = mod(c2, n) + 1; % position to fill the offspring 
+    donor_index = current_pos; % index to iterate through the donor
     while any(offspring == -1)
         gene = donor(donor_index);
-        % Se il gene non è già presente nell'offspring, lo inseriamo
+        % if the gene is not already present in the offspring, insert it
         if ~ismember(gene, offspring)
             offspring(current_pos) = gene;
             current_pos = mod(current_pos, n) + 1;
